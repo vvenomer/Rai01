@@ -1,0 +1,78 @@
+﻿@{
+    ViewData["Title"] = "Index";
+}
+
+<h2>@ViewData["Title"]</h2>
+
+<input id="friend_login" onkeyup="AddFriend(event)" />
+<table class="table">
+    <thead>
+        <tr>
+            <th>
+                Friends
+            </th>
+            <th>
+                Action
+            </th>
+        </tr>
+    </thead>
+    <tbody id="friends_list">
+    </tbody>
+</table>
+<form asp-action="Import" enctype="multipart/form-data">
+    <div class="form-group">
+        <label for="file" class="control-label">Friends list</label>
+        <input id="file" name="file" type="file" accept="application/json" />
+    </div>
+    <div class="form-group">
+        <button type="submit">Import</button>
+    </div>
+</form>
+
+<script>
+    function SendAJAX(httpMethod, url) {
+        var ajax = new XMLHttpRequest();
+        var promise = new Promise(onResponse =>
+            ajax.onreadystatechange = function () {
+                if (this.readyState == 4 && this.status == 200) {
+                    onResponse(this.responseText);
+                }
+            });
+        ajax.open(httpMethod, url, true);
+        ajax.send();
+        return promise;
+    }
+    async function AddFriend(e) {
+        if (e.keyCode === 13) {
+            var login = document.getElementById("friend_login").value;
+            var result = await SendAJAX("POST", "Friends/Add/" + login);
+            if (JSON.parse(result)) {
+                alert("Successfully added friend " + login + "!");
+                UpdateList();
+            }
+            else {
+                alert("Failed to add friend named " + login + "!");
+            }
+        }
+    }
+    async function DeleteFriend(e) {
+        var login = e.target.dataset.login;
+        var result = await SendAJAX("POST", "Friends/Del/" + login);
+        if (result) {
+            alert("Successfully deleted friend " + login + "!");
+            UpdateList();
+        }
+        else {
+            alert("Failed to delete friend named " + login + "!");
+        }
+    }
+    async function UpdateList() {
+        var listJson = await SendAJAX("GET", "Friends/List");
+        list = JSON.parse(listJson);
+        var htmlResult = "";
+        for (var i = 0; i < list.length; i++)
+            htmlResult += "<tr><td>" + list[i] + "</td><td><a onclick=\"DeleteFriend(event)\" data-login=\"" + list[i] + "\">Delete</a></td></tr>";
+        document.getElementById("friends_list").innerHTML = htmlResult;
+    }
+    UpdateList();
+</script>

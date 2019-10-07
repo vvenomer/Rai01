@@ -39,7 +39,7 @@ namespace Rai01
             if (friendDatabase == null)
                 friendDatabase = new List<Friend>();
 
-            services.AddRouting();
+            services.AddSession();
 
             services.AddMvc().SetCompatibilityVersion(CompatibilityVersion.Version_2_1);
         }
@@ -61,7 +61,7 @@ namespace Rai01
             app.UseStaticFiles();
             app.UseCookiePolicy();
 
-            //app.UseSession();
+            app.UseSession();
 
             app.UseMvc(routes =>
             {

@@ -8,8 +8,12 @@ namespace Rai01.Controllers
         [Route("Login/{login}")]
         public IActionResult Login(string login)
         {
-            HttpContext.Session.SetString("login", login);
-            return RedirectToAction("Index", "Friends");
+            if(Startup.userDatabase.ContainsKey(login) || login == "admin")
+            {
+                HttpContext.Session.SetString("login", login);
+                return RedirectToAction("Index", "Friends");
+            }
+            return BadRequest("Not registered");
         }
 
         [Route("Logout")]

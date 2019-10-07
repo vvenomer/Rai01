@@ -12,25 +12,32 @@ namespace Rai01.Controllers
 {
     public class UserController : Controller
     {
-
-        public UserController()
-        {
-        }
-
         [Route("User/List")]
         public ActionResult Index()
         {
+            if(!IsAdmin())
+            {
+                return BadRequest("Only Admin has access to this page!");
+            }
             return View(Startup.userDatabase.Select(u => u.Value));
         }
 
         public ActionResult Init()
         {
+            if (!IsAdmin())
+            {
+                return BadRequest("Only Admin has access to this page!");
+            }
             return View();
         }
 
         [HttpPost]
         public ActionResult Init(string users, string friends)
         {
+            if (!IsAdmin())
+            {
+                return BadRequest("Only Admin has access to this page!");
+            }
             try
             {
                 List<string> usersList = JsonConvert.DeserializeObject<List<string>>(users);
@@ -56,6 +63,10 @@ namespace Rai01.Controllers
         [Route("User/Add")]
         public ActionResult Create()
         {
+            if (!IsAdmin())
+            {
+                return BadRequest("Only Admin has access to this page!");
+            }
             return View();
         }
         
@@ -63,6 +74,10 @@ namespace Rai01.Controllers
         [ValidateAntiForgeryToken]
         public ActionResult Create(string login)
         {
+            if (!IsAdmin())
+            {
+                return BadRequest("Only Admin has access to this page!");
+            }
             try
             {
                 var user = new User
@@ -82,6 +97,10 @@ namespace Rai01.Controllers
 
         public ActionResult Delete(string login)
         {
+            if (!IsAdmin())
+            {
+                return BadRequest("Only Admin has access to this page!");
+            }
             return View(Startup.userDatabase[login]);
         }
 
@@ -90,6 +109,10 @@ namespace Rai01.Controllers
         [ValidateAntiForgeryToken]
         public ActionResult DeleteConfirmed(string login)
         {
+            if (!IsAdmin())
+            {
+                return BadRequest("Only Admin has access to this page!");
+            }
             try
             {
                 Startup.userDatabase.Remove(login);
@@ -99,6 +122,13 @@ namespace Rai01.Controllers
             {
                 return View();
             }
+        }
+
+        private bool IsAdmin()
+        {
+            if (HttpContext.Session.TryGetValue("login", out byte[] value))
+                return HttpContext.Session.GetString("login") == "admin";
+            return false;
         }
     }
 }
