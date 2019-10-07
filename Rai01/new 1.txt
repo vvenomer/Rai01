@@ -1,0 +1,2 @@
+["lol","lol2","a","b"]
+[{"Friend1":"lol","Friend2":"a"},{"Friend1":"b","Friend2":"lol2"}]
