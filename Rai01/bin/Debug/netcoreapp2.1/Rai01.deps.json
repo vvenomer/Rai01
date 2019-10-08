@@ -32,6 +32,14 @@
         "runtime": {
           "Rai01.dll": {}
         },
+        "resources": {
+          "en/Rai01.resources.dll": {
+            "locale": "en"
+          },
+          "pl/Rai01.resources.dll": {
+            "locale": "pl"
+          }
+        },
         "compile": {
           "Rai01.dll": {}
         }

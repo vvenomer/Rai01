@@ -39,5 +39,11 @@ namespace Rai01.Controllers
         {
             return View(new ErrorViewModel { RequestId = Activity.Current?.Id ?? HttpContext.TraceIdentifier });
         }
+
+        [Route("Error/{error:int}")]
+        public IActionResult StatusCodeError(int error)
+        {
+            return View(error);
+        }
     }
 }

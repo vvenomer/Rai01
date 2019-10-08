@@ -95,6 +95,7 @@ namespace Rai01.Controllers
             }
         }
 
+        [Route("User/Delete/{login}")]
         public ActionResult Delete(string login)
         {
             if (!IsAdmin())
@@ -105,7 +106,7 @@ namespace Rai01.Controllers
         }
 
         // POST: User/Delete/5
-        [HttpPost, ActionName("Delete")]
+        [HttpPost("User/Delete/{login}")]
         [ValidateAntiForgeryToken]
         public ActionResult DeleteConfirmed(string login)
         {

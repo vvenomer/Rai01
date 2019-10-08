@@ -9,10 +9,10 @@
     <thead>
         <tr>
             <th>
-                Friends
+                @Localizer["Friends"]
             </th>
             <th>
-                Action
+                @Localizer["Actions"]
             </th>
         </tr>
     </thead>
@@ -21,13 +21,14 @@
 </table>
 <form asp-action="Import" enctype="multipart/form-data">
     <div class="form-group">
-        <label for="file" class="control-label">Friends list</label>
+        <label for="file" class="control-label">@Localizer["FriendsList"]</label>
         <input id="file" name="file" type="file" accept="application/json" />
     </div>
     <div class="form-group">
-        <button type="submit">Import</button>
+        <button type="submit">@Localizer["Import"]</button>
     </div>
 </form>
+<a href="Friends/Export">@Localizer["Export"]</a>
 
 <script>
     function SendAJAX(httpMethod, url) {
@@ -47,11 +48,11 @@
             var login = document.getElementById("friend_login").value;
             var result = await SendAJAX("POST", "Friends/Add/" + login);
             if (JSON.parse(result)) {
-                alert("Successfully added friend " + login + "!");
+                //alert("Successfully added friend " + login + "!");
                 UpdateList();
             }
             else {
-                alert("Failed to add friend named " + login + "!");
+                alert("@Localizer["FailAdd"] " + login + "!");
             }
         }
     }
@@ -59,11 +60,11 @@
         var login = e.target.dataset.login;
         var result = await SendAJAX("POST", "Friends/Del/" + login);
         if (result) {
-            alert("Successfully deleted friend " + login + "!");
+            //alert("Successfully deleted friend " + login + "!");
             UpdateList();
         }
         else {
-            alert("Failed to delete friend named " + login + "!");
+            alert("@Localizer["FailDelete"] " + login + "!");
         }
     }
     async function UpdateList() {
@@ -71,7 +72,7 @@
         list = JSON.parse(listJson);
         var htmlResult = "";
         for (var i = 0; i < list.length; i++)
-            htmlResult += "<tr><td>" + list[i] + "</td><td><a onclick=\"DeleteFriend(event)\" data-login=\"" + list[i] + "\">Delete</a></td></tr>";
+            htmlResult += "<tr><td>" + list[i] + "</td><td><a onclick=\"DeleteFriend(event)\" data-login=\"" + list[i] + "\">@Localizer["Delete"]</a></td></tr>";
         document.getElementById("friends_list").innerHTML = htmlResult;
     }
     UpdateList();

@@ -1,11 +1,13 @@
 ﻿using System;
 using System.Collections.Generic;
+using System.Globalization;
 using System.Linq;
 using System.Threading.Tasks;
 using Microsoft.AspNetCore.Builder;
 using Microsoft.AspNetCore.Hosting;
 using Microsoft.AspNetCore.Http;
 using Microsoft.AspNetCore.HttpsPolicy;
+using Microsoft.AspNetCore.Localization;
 using Microsoft.AspNetCore.Mvc;
 using Microsoft.Extensions.Configuration;
 using Microsoft.Extensions.DependencyInjection;
@@ -41,7 +43,12 @@ namespace Rai01
 
             services.AddSession();
 
-            services.AddMvc().SetCompatibilityVersion(CompatibilityVersion.Version_2_1);
+            services.AddLocalization();
+
+            services.AddMvc().
+                SetCompatibilityVersion(CompatibilityVersion.Version_2_1).
+                AddDataAnnotationsLocalization().
+                AddViewLocalization(options => options.ResourcesPath = "Resources");
         }
 
         // This method gets called by the runtime. Use this method to configure the HTTP request pipeline.
@@ -49,6 +56,7 @@ namespace Rai01
         {
             if (env.IsDevelopment())
             {
+                app.UseStatusCodePagesWithReExecute("/Error/{0}");
                 app.UseDeveloperExceptionPage();
             }
             else
@@ -62,6 +70,16 @@ namespace Rai01
             app.UseCookiePolicy();
 
             app.UseSession();
+
+            var supportedCultures = new[] {
+                new CultureInfo("pl-PL"), new CultureInfo("pl"),
+                new CultureInfo("en-US"), new CultureInfo("en") };
+            app.UseRequestLocalization(new RequestLocalizationOptions
+            {
+                DefaultRequestCulture = new RequestCulture("pl"),
+                SupportedCultures = supportedCultures,
+                SupportedUICultures = supportedCultures
+            });
 
             app.UseMvc(routes =>
             {

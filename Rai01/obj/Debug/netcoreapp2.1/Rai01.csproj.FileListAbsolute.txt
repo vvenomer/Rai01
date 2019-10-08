@@ -71,3 +71,13 @@ C:\Users\pblajer\source\repos\Rai01\Rai01\obj\Debug\netcoreapp2.1\Rai01.dll
 C:\Users\pblajer\source\repos\Rai01\Rai01\obj\Debug\netcoreapp2.1\Rai01.pdb
 C:\Users\pblajer\source\repos\Rai01\Rai01\obj\Debug\netcoreapp2.1\Rai01.csproj.CopyComplete
 C:\Users\pblajer\source\repos\Rai01\Rai01\obj\Debug\netcoreapp2.1\Razor\Views\Friends\Index.g.cshtml.cs
+C:\Users\pblajer\source\repos\Rai01\Rai01\obj\Debug\netcoreapp2.1\Razor\Views\Home\StatusCodeError.g.cshtml.cs
+C:\Users\pblajer\source\repos\Rai01\Rai01\bin\Debug\netcoreapp2.1\en\Rai01.resources.dll
+C:\Users\pblajer\source\repos\Rai01\Rai01\bin\Debug\netcoreapp2.1\pl\Rai01.resources.dll
+C:\Users\pblajer\source\repos\Rai01\Rai01\obj\Debug\netcoreapp2.1\Rai01.csproj.GenerateResource.cache
+C:\Users\pblajer\source\repos\Rai01\Rai01\obj\Debug\netcoreapp2.1\en\Rai01.resources.dll
+C:\Users\pblajer\source\repos\Rai01\Rai01\obj\Debug\netcoreapp2.1\pl\Rai01.resources.dll
+C:\Users\pblajer\source\repos\Rai01\Rai01\obj\Debug\netcoreapp2.1\Rai01.Resources.Views.Home.StatusCodeError.en.resources
+C:\Users\pblajer\source\repos\Rai01\Rai01\obj\Debug\netcoreapp2.1\Rai01.Resources.Views.Home.StatusCodeError.pl.resources
+C:\Users\pblajer\source\repos\Rai01\Rai01\obj\Debug\netcoreapp2.1\Rai01.Resources.Views.Friends.Index.en.resources
+C:\Users\pblajer\source\repos\Rai01\Rai01\obj\Debug\netcoreapp2.1\Rai01.Resources.Views.Friends.Index.pl.resources

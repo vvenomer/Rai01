@@ -20,7 +20,7 @@ namespace Rai01.Controllers
         public IActionResult Logout()
         {
             HttpContext.Session.Remove("login");
-            return RedirectToAction("Index", "Friends");
+            return RedirectToAction("Index", "Home");
         }
     }
 }
